@@ -1,0 +1,41 @@
+<article class="account-login">
+    <header class="page-title">
+        <h1><?php echo $this->__('Login or Create an Account') ?></h1>
+    </header>
+    <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+    <form action="<?php echo $this->getPostActionUrl() ?>" method="post" id="login-form">
+        <div class="col2-set">
+            <div class="col-1 new-users">
+                <div class="content">
+                    <h2><?php echo $this->__('New Customers') ?></h2>
+                    <p><?php echo $this->__('By creating an account with our store, you will be able to move through the checkout process faster, store multiple shipping addresses, view and track your orders in your account and more.') ?></p>
+                    <button type="button" title="<?php echo $this->__('Create an Account') ?>" class="button" onclick="window.location='<?php echo $this->getCreateAccountUrl() ?>';"><span><span><?php echo $this->__('Create an Account') ?></span></span></button>
+                </div>
+            </div>
+            <div class="col-2 registered-users">
+                <div class="content">
+                    <h2><?php echo $this->__('Registered Customers') ?></h2>
+                    <p><?php echo $this->__('If you have an account with us, please log in.') ?> <a href="<?php echo $this->getForgotPasswordUrl() ?>" class="f-left"><?php echo $this->__('Forgot Your Password?') ?></a></p>
+                    <p>
+                        <label for="email" class="required"><?php echo $this->__('Email Address') ?> <em>*</em></label>
+                        <input type="text" name="login[username]" value="<?php echo $this->htmlEscape($this->getUsername()) ?>" id="email" class="input-text required-entry validate-email" title="<?php echo $this->__('Email Address') ?>" />
+                    </p>
+                    <p>
+                        <label for="pass" class="required"><?php echo $this->__('Password') ?> <em>*</em></label>
+                        <input type="password" name="login[password]" class="input-text required-entry validate-password" id="pass" title="<?php echo $this->__('Password') ?>" />
+                    </p>
+                    <?php echo $this->getChildHtml('persistent.remember.me'); ?>
+                    <?php echo $this->getChildHtml('persistent.remember.me.tooltip'); ?>
+                    <p class="required"><small><?php echo $this->__('* Required Fields') ?></small></p>
+                    <p></p>
+                    <p><button type="submit" class="button" title="<?php echo $this->__('Login') ?>" name="send" id="send2"><?php echo $this->__('Login') ?></button></p>
+                </div>
+            </div>
+        </div>
+    </form>
+    <script type="text/javascript">
+    //<![CDATA[
+        var dataForm = new VarienForm('login-form', true);
+    //]]>
+    </script>
+</article>

@@ -1,0 +1,4 @@
+design/*                app/design/frontend/mage-to-measure/default/
+skin/images/*           skin/frontend/mage-to-measure/default/images/
+skin/js/*               skin/frontend/mage-to-measure/default/js/
+skin/css/styles.css     skin/frontend/mage-to-measure/default/css/styles.css

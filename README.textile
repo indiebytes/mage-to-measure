@@ -1,0 +1,26 @@
+h2. Installation
+
+# In your Magento root directory, run <code>modman init</code>. This will create a <code>.modman</code> directory.
+# Run <code>modman mage-to-measure clone https://github.com/indiebytes/mage-to-measure.git</code> to create a clone of the theme in <code>.modman/mage-to-measure</code>.
+# Finally, run <code>modman mage-to-measure deploy</code> to set up the appropriate symbolic links from the <code>.modman/mage-to-measure</code> directory into the Magento folder hierarchy.
+
+Remember to configure Magento's template settings to allow symlinks under System &rarr; Configuration &rarr; Advanced &rarr; Developer &rarr; Template Settings. Be warned though, enabling this feature is not recommended on production environments because it represents a potential security risk.
+
+h2. Tools
+
+*Module Manager*
+"http://code.google.com/p/module-manager/":http://code.google.com/p/module-manager/
+
+*Compass*
+"http://compass-style.org/":http://compass-style.org/
+
+h2. Inspiration
+
+*Magento Boilerplate*
+"https://github.com/zeljkoprsa/Magento-Boilerplate":https://github.com/zeljkoprsa/Magento-Boilerplate
+
+*HTML 5 Boilerplate*
+"http://html5boilerplate.com/":http://html5boilerplate.com/
+
+*Golden Grid System*
+"http://goldengridsystem.com/":http://goldengridsystem.com/

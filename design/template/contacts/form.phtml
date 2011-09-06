@@ -1,0 +1,36 @@
+<article>
+<div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
+    <header>
+        <h1><?php echo Mage::helper('contacts')->__('Contact Us') ?></h1>
+    </header>
+    <form action="<?php echo $this->getFormAction(); ?>" id="contactForm" method="post">
+        <h2 class="legend"><?php echo Mage::helper('contacts')->__('Contact Information') ?></h2>
+        <p>
+            <label for="name" class="required"><?php echo Mage::helper('contacts')->__('Name') ?> <em>*</em></label>
+            <input name="name" id="name" title="<?php echo Mage::helper('contacts')->__('Name') ?>" value="<?php echo $this->htmlEscape($this->helper('contacts')->getUserName()) ?>" class="input-text required-entry" type="text" />
+        </p>
+        <p>
+            <label for="email" class="required"><?php echo Mage::helper('contacts')->__('Email') ?> <em>*</em></label>
+            <input name="email" id="email" title="<?php echo Mage::helper('contacts')->__('Email') ?>" value="<?php echo $this->htmlEscape($this->helper('contacts')->getUserEmail()) ?>" class="input-text required-entry validate-email" type="email" />
+        </p>
+        <p>
+            <label for="telephone"><?php echo Mage::helper('contacts')->__('Telephone') ?></label>
+            <input name="telephone" id="telephone" title="<?php echo Mage::helper('contacts')->__('Telephone') ?>" value="" class="input-text" type="text" />
+        </p>
+        <p>
+            <label for="comment" class="required"><?php echo Mage::helper('contacts')->__('Comment') ?> <em>*</em></label>
+            <textarea name="comment" id="comment" title="<?php echo Mage::helper('contacts')->__('Comment') ?>" class="required-entry input-text" cols="5" rows="3"></textarea>
+        </p>
+
+        <p class="required"><small><?php echo Mage::helper('contacts')->__('* Required Fields') ?></small></p>
+
+        <input type="text" name="hideit" id="hideit" value="" style="display:none !important;" />
+
+        <button type="submit" title="<?php echo Mage::helper('contacts')->__('Submit') ?>" class="button"><?php echo Mage::helper('contacts')->__('Submit') ?></button>
+    </form>
+</article>
+<script type="text/javascript">
+//<![CDATA[
+    var contactForm = new VarienForm('contactForm', true);
+//]]>
+</script>

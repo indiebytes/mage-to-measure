@@ -1,0 +1,23 @@
+/*
+ * Imports
+ */
+@import "compass/css3";
+@import "compass/utilities";
+
+/*
+ * Grid variables
+ */
+$line:24;
+$column:100%/18;
+$font-size:16;
+$lineheight:$line/$font-size*1em;
+
+/*
+ * Color variables
+ */
+$background:#fff;
+$background-demo:rgb(247, 143, 41);
+
+$color:#000;
+$color-light:#bababa;
+$color-message-error:#c30;

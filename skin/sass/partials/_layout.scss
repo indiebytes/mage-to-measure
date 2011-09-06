@@ -1,0 +1,102 @@
+@import "partials/base";
+
+html { height: 100% }
+body { background: $background; min-height: 100% }
+
+.col-main { @include box-sizing(border-box); margin-bottom: lineheight; padding: $lineheight/2 }
+#content { margin: 0 $column }
+.sidebar {
+	@include box-sizing(border-box);
+	font-size: $lineheight/2;
+	overflow: hidden;
+	padding: $lineheight/2
+}
+
+.col1-layout {
+ 	.col-main { float: left; width: 100% }
+}
+
+.col3-layout {
+	.col-main { float: left; width: 100% }
+
+	.col-left,
+	.col-right { float: right; width: 100% }
+}
+
+@media screen and (min-width: 30em) {
+	.col-main,
+	.col-left { float: left }
+	.col-right { float: right }
+	
+	.col2-left-layout,
+	.col2-right-layout {
+		.col-main { width: 50% }
+		.sidebar { width: 50% }
+	}
+	
+	.col3-layout {
+		.col-main { width: 50% }
+		.col-left { margin-bottom: $lineheight }
+		.col-left,
+		.col-right { float: right; width: 50% }
+	}
+	
+	.col2-set {
+		.col-1,
+		.col-2 { @include box-sizing(border-box); width: 50% }
+		.col-1 { float: left; padding-right: $lineheight/2 }
+		.col-2 { float: right; padding-left: $lineheight/2 }
+	}
+}
+
+@media screen and (min-width: 45em) {
+	.col2-left-layout,
+	.col2-right-layout {
+		.col-main { width: 62.5% }
+		.sidebar { width: 37.5% }
+	}
+
+	.col3-layout {
+		.col-main { width: 50% }
+		.col-left { float: left }
+		.sidebar { width: 25% }
+	}
+}
+
+#masthead { margin: 0 $column; padding: $lineheight/2 }
+#colophon { clear: both; margin: 0 $column; padding: $lineheight $lineheight/2 }
+
+#breadcrumbs {
+	margin: 0 $column;
+	padding: $lineheight/2;
+	li { padding: 0 }
+}
+
+.demo-notice { margin: 0 }
+.messages { 
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	ul { list-style: none; margin: 0; padding: 0 }
+	.error-msg { color: #c30 }
+}
+
+.page { margin: 0 auto }
+footer, nav {
+	ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		li {
+			display: inline;
+			line-height: 2;
+			padding: 0 $lineheight/2
+		}
+		li:first-child,
+		.first { padding-left: 0 }
+		.last { padding-right: 0 }
+	}
+}
+
+
+ul.checkout-types { list-style: none; margin: 0; padding: 0 }

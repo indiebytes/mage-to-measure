@@ -1,0 +1,13 @@
+<hgroup id="masthead">
+    <header>
+        <h1><a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo"><img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /> <?php echo $this->getLogoAlt() ?></a></h1>
+        <p class="welcome-msg"><?php echo $this->getWelcome() ?> <?php echo $this->getAdditionalHtml() ?></p>
+        <nav class="quick-access">
+            <?php echo $this->getChildHtml('topSearch') ?>
+            <?php echo $this->getChildHtml('topLinks') ?>
+            <?php echo $this->getChildHtml('store_language') ?>
+        </nav>
+        <?php echo $this->getChildHtml('topContainer'); ?>
+    </header>
+</hgroup>
+<?php echo $this->getChildHtml('topMenu') ?>

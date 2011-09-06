@@ -1,0 +1,44 @@
+@import "partials/base";
+html { background: #fff; -webkit-font-smoothing: subpixel-antialiased }
+body {
+	/* 16px / 24px */
+	font-size: $font-size / 16 * 1em; 
+	line-height: $line / $font-size * 1em;
+}
+
+h1, h2 {
+	/* 26 / 36px */
+	font-size: 26 / $font-size * 1em;
+	line-height: ($line * 1.5) / 26 * 1em;
+}
+h2 { font-weight: 400 }
+h3 {
+	/* 16px / 24px */
+	font-size: $font-size / 16 * 1em;
+	line-height: $line / $font-size * 1em; /* 24 */
+}
+
+a { }
+a:hover { }
+a:visited { }
+nav a,
+a img { border: none }
+
+.validation-advice { color: $color-message-error }
+
+.demo-notice {
+	background: #000;
+	color: #fff;
+	font-size: $lineheight/2;
+	text-align: center;
+}
+#breadcrumbs li { font-size: $lineheight/2; font-style: italic }
+#masthead {
+	h1 {
+		a, a:visited { color: $color; text-decoration: none }
+		img { margin: 0; padding: 0; vertical-align: text-bottom }
+	}
+	.welcome-msg { font-family: Georgia; font-style: italic }
+}
+
+#colophon { color: $color-light; font-size: $lineheight/2 }
