@@ -4,7 +4,7 @@
 
 button,
 label { display: block }
-
+label em { color: $color-message-error }
 /* Search */
 .form-search {
     margin:0 0 1em;
