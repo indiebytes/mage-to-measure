@@ -7,43 +7,43 @@ label { display: block }
 
 /* Search */
 .form-search {
-	margin:0 0 1em;
-	input[type="search"],
-	input[type="text"] {
-		border:1px solid #ccc;
-		color:#ccc;
-		padding: 3px 3px 3px 24px;
-		width: 100%
-	}
-	input[type="search"]:focus,
-	input[type="text"]:focus {
-		border:1px solid #000;
-		color:#000;
-	}
-	input[type="submit"],
-	button[type="submit"],
-	label {
-		display:none;
-	}
-	.search-autocomplete {
-		z-index:999;
-		ul {
-			border:1px solid #ddd;
-			background-color:#fff;
-			list-style:none;
-			margin:0;
-			padding:0;
-			li {
-				padding:3px;
-				border-bottom:1px solid #ddd;
-				cursor:pointer;
-				.amount {
-					float:right;
-					font-weight:bold;
-				}
-			}
-		}
-	}
+    margin:0 0 1em;
+    input[type="search"],
+    input[type="text"] {
+        border:1px solid #ccc;
+        color:#ccc;
+        padding: 3px 3px 3px 24px;
+        width: 100%
+    }
+    input[type="search"]:focus,
+    input[type="text"]:focus {
+        border:1px solid #000;
+        color:#000;
+    }
+    input[type="submit"],
+    button[type="submit"],
+    label {
+        display:none;
+    }
+    .search-autocomplete {
+        z-index:999;
+        ul {
+            border:1px solid #ddd;
+            background-color:#fff;
+            list-style:none;
+            margin:0;
+            padding:0;
+            li {
+                padding:3px;
+                border-bottom:1px solid #ddd;
+                cursor:pointer;
+                .amount {
+                    float:right;
+                    font-weight:bold;
+                }
+            }
+        }
+    }
 }
 
 input[type="text"],
@@ -52,17 +52,17 @@ input[type="password"],
 input[type="search"],
 textarea,
 select {
-	border:1px solid #ccc;
-	@include box-sizing(border-box);
-	color:#ccc;
-	padding: 3px;
-	width: 100%
+    border:1px solid #ccc;
+    @include box-sizing(border-box);
+    color:#ccc;
+    padding: 3px;
+    width: 100%
 }
 input[type="text"]:focus,
 input[type="email"]:focus,
 input[type="password"]:focus,
 textarea:focus,
 select:focus {
-	border:1px solid #000;
-	color:#000;
+    border:1px solid #000;
+    color:#000;
 }

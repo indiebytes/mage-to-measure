@@ -1,13 +1,13 @@
 @import "partials/base";
 
 #poll-answers {
-	list-style: none;
-	margin: 0 0 $lineheight;
-	padding: 0;
-	li {
-		margin: 0;
-		padding: 0;
-		.label,
-		label { display: inline }
-	}
+    list-style: none;
+    margin: 0 0 $lineheight;
+    padding: 0;
+    li {
+        margin: 0;
+        padding: 0;
+        .label,
+        label { display: inline }
+    }
 }
