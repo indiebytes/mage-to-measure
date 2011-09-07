@@ -1,3 +1,5 @@
+h1. Mage To Measure
+
 h2. Installation
 
 # In your Magento root directory, run <code>modman init</code>. This will create a <code>.modman</code> directory.
@@ -24,3 +26,7 @@ h2. Inspiration
 
 *Golden Grid System*
 "http://goldengridsystem.com/":http://goldengridsystem.com/
+
+h2. Support
+
+"!http://api.flattr.com/button/flattr-badge-large.png!(Flattr this git repo)":https://flattr.com/submit/auto?user_id=andk&url=https://github.com/indiebytes/mage-to-measure&title=Mage%20To%20Measure&language=en_GB&tags=github&category=software
