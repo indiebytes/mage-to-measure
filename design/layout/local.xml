@@ -52,13 +52,12 @@
                 <action method="addJs"><script>varien/menu.js</script></action>
                 <action method="addJs"><script>mage/translate.js</script></action>
                 <action method="addJs"><script>mage/cookies.js</script></action>
+                <block type="page/js_cookie" name="js_cookies" template="page/js/cookie.phtml"/>
                 -->
 
                 <!-- Add our own javascripts -->
                 <action method="addItem"><type>skin_js</type><name>js/ggs.js</name></action>
                 <action method="addItem"><type>skin_js</type><name>js/script.js</name></action>
-
-                <block type="page/js_cookie" name="js_cookies" template="page/js/cookie.phtml"/>
             </block>
         </reference>
     </default>
