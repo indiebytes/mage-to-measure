@@ -2,7 +2,7 @@
 <layout version="0.1.0">
     <default>
         <reference name="head">
-            <!-- Remove items -->
+            <!-- Remove javascript and stylesheets we don't want to use -->
             <action method="removeItem"><type>skin_js</type><name>js/ie6.js</name><if>lt IE 7</if></action>
             <action method="removeItem"><stylesheet>css/print.css</stylesheet><params>media="print"</params></action>
             <action method="removeItem"><type>js</type><name>lib/ds-sleight.js</name><params/><if>lt IE 7</if></action>
@@ -10,14 +10,56 @@
             <action method="removeItem"><type>skin_css</type><name>css/widgets.css</name></action>
             <action method="removeItem"><type>skin_css</type><name>css/print.css</name></action>
 
+            <!-- Remove native javascript that we should load in the bottom of the page instead -->
+            <!--
+            <action method="removeItem"><type>js</type><name>prototype/prototype.js</name></action>
+            <action method="removeItem"><type>js</type><name>lib/ccard.js</name></action>
+            <action method="removeItem"><type>js</type><name>prototype/validation.js</name></action>
+            <action method="removeItem"><type>js</type><name>scriptaculous/builder.js</name></action>
+            <action method="removeItem"><type>js</type><name>scriptaculous/effects.js</name></action>
+            <action method="removeItem"><type>js</type><name>scriptaculous/dragdrop.js</name></action>
+            <action method="removeItem"><type>js</type><name>scriptaculous/controls.js</name></action>
+            <action method="removeItem"><type>js</type><name>scriptaculous/slider.js</name></action>
+            <action method="removeItem"><type>js</type><name>varien/js.js</name></action>
+            <action method="removeItem"><type>js</type><name>varien/form.js</name></action>
+            <action method="removeItem"><type>js</type><name>varien/menu.js</name></action>
+            <action method="removeItem"><type>js</type><name>mage/translate.js</name></action>
+            <action method="removeItem"><type>js</type><name>mage/cookies.js</name></action>
+            <action method="unsetChild"><name>js_cookies</name></action>
+            -->
+
             <remove name="right.permanent.callout"/>
             <remove name="left.permanent.callout"/>
             <remove name="paypal.partner.right.logo"/>
 
             <!-- Add items -->
-            <action method="addItem"><type>skin_js</type><name>js/modernizr-2.0.6.js</name><params/></action>
-            <action method="addItem"><type>skin_js</type><name>js/ggs.js</name></action>
-            <action method="addItem"><type>skin_js</type><name>js/script.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>js/modernizr-2.0.6.min.js</name><params/></action>
+        </reference>
+        <reference name="root">
+            <block type="page/html_head" name="foot" as="foot" template="page/html/foot.phtml">
+                <!-- Add native javascript that we have removed from the top of the page -->
+                <!--
+                <action method="addJs"><script>prototype/prototype.js</script></action>
+                <action method="addJs"><script>lib/ccard.js</script></action>
+                <action method="addJs"><script>prototype/validation.js</script></action>
+                <action method="addJs"><script>scriptaculous/builder.js</script></action>
+                <action method="addJs"><script>scriptaculous/effects.js</script></action>
+                <action method="addJs"><script>scriptaculous/dragdrop.js</script></action>
+                <action method="addJs"><script>scriptaculous/controls.js</script></action>
+                <action method="addJs"><script>scriptaculous/slider.js</script></action>
+                <action method="addJs"><script>varien/js.js</script></action>
+                <action method="addJs"><script>varien/form.js</script></action>
+                <action method="addJs"><script>varien/menu.js</script></action>
+                <action method="addJs"><script>mage/translate.js</script></action>
+                <action method="addJs"><script>mage/cookies.js</script></action>
+                -->
+
+                <!-- Add our own javascripts -->
+                <action method="addItem"><type>skin_js</type><name>js/ggs.js</name></action>
+                <action method="addItem"><type>skin_js</type><name>js/script.js</name></action>
+
+                <block type="page/js_cookie" name="js_cookies" template="page/js/cookie.phtml"/>
+            </block>
         </reference>
     </default>
     <!-- Add non-default layout rules in alphabetical order below -->
