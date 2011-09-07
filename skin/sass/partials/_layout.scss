@@ -9,6 +9,7 @@ body { background: $background; min-height: 100% }
     @include box-sizing(border-box);
     font-size: $lineheight/2;
     overflow: hidden;
+    margin-bottom: $lineheight;
     padding: $lineheight/2
 }
 
