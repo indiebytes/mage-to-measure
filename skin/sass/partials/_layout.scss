@@ -28,20 +28,20 @@ body { background: $background; min-height: 100% }
     .col-main,
     .col-left { float: left }
     .col-right { float: right }
-    
+
     .col2-left-layout,
     .col2-right-layout {
         .col-main { width: 50% }
         .sidebar { width: 50% }
     }
-    
+
     .col3-layout {
         .col-main { width: 50% }
         .col-left { margin-bottom: $lineheight }
         .col-left,
         .col-right { float: right; width: 50% }
     }
-    
+
     .col2-set {
         .col-1,
         .col-2 { @include box-sizing(border-box); width: 50% }
