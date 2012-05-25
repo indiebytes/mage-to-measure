@@ -2,7 +2,9 @@
     <header class="page-title">
         <h1><?php echo $this->__('Login or Create an Account') ?></h1>
     </header>
+
     <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+
     <form action="<?php echo $this->getPostActionUrl() ?>" method="post" id="login-form">
         <div class="col2-set">
             <div class="col-1 new-users">
@@ -33,9 +35,8 @@
             </div>
         </div>
     </form>
-    <script type="text/javascript">
-    //<![CDATA[
-        var dataForm = new VarienForm('login-form', true);
-    //]]>
-    </script>
 </article>
+
+<script>
+    var dataForm = new VarienForm('login-form', true);
+</script>

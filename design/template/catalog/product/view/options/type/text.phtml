@@ -1,0 +1,174 @@
+<?php 
+/**
+ * Mod: This design template is modified to be able to add more needed validations to
+ *      custom options. When product has cusotm options where sku is free_1 or notfree_1
+ *      for example those options will be hidden and a new field will be created.
+ */
+?>
+<?php
+    $_option = $this->getOption();
+
+    // Get all product custom options
+    $optionCollection = Mage::getModel('catalog/product_option')->getProductOptionCollection($this->getProduct());
+
+    // Check if product has free or not free custom option
+    $isFree    = (strpos($_option->getSku(), 'free_') !== 0) ? false : true;
+    $isNotFree = (strpos($_option->getSku(), 'notfree_') !== 0) ? false : true;
+
+    $embroiderySkus = array('free', 'notfree');
+
+    /*
+     * We check if this product has custom options where not free or free is 
+     * included. In this case we hide the field and we create a new field that we 
+     * validate.
+     */
+    $shouldBeHidden = ($isFree || $isNotFree) ? true : false;
+
+    global $embroideryPrices;
+
+    if ($shouldBeHidden && !is_array($embroideryPrices)) {
+        foreach ($optionCollection as $option) {
+            if (in_array(reset(explode('_', $option->getSku())), $embroiderySkus) == true) {
+                $customId = (int) end(explode('_', $option->getSku()));
+                $embroideryPrices[$customId][] = $option->getPrice(true);
+            }
+        }
+    }
+
+    // Check if this product has initial custom option
+    $isInitial = (strpos($_option->getSku(), 'initial_') === false) ? false : true;
+?>
+    <dt<?php if ($shouldBeHidden === true): ?> style="display: none"<?php endif; ?>><label<?php if ($_option->getIsRequire()) echo ' class="required"' ?>><?php if ($_option->getIsRequire()) echo '<em>*</em>' ?><?php echo  $this->htmlEscape($_option->getTitle()) ?></label>
+        <?php echo $this->getFormatedPrice() ?></dt>
+    <dd<?php if ($_option->decoratedIsLast){?> class="last"<?php }?><?php if ($shouldBeHidden === true): ?> style="display: none"<?php endif; ?>>
+        <div class="input-box">
+            <?php if ($_option->getType() == Mage_Catalog_Model_Product_Option::OPTION_TYPE_FIELD): ?>
+            <?php 
+                if ($isInitial) {
+                    $maxLength   = $_option->getMaxCharacters();
+                    $optionSku   = $_option->getSku();
+                    $inputFielId = 'options_'.$_option->getId().'_text';
+                    
+                    /*
+                     * If isInintial we need to save all free and not free fields ids 
+                     * in javascript array to be able to added as parameter to 
+                     * javascript function validateInitial where we remove free 
+                     * and not free values from fields
+                     */
+                    $javascriptArray = 'a'.$_option->getId().'Array';
+            ?>
+            <script>
+                var <?php echo $javascriptArray ?> = new Array();
+                <?php
+                    $counter = 0;
+                    foreach ($optionCollection as $currentOption) {
+                        $isFreeOption = (strpos($currentOption->getSku(), 'free_') === false) ? false : true;
+                        if ($isFreeOption) {
+                            $freeParams = 'options_'.$currentOption->getId().'_text';
+                ?>
+
+                <?php echo $javascriptArray ?>[<?php echo $counter ?>] = "<?php echo $freeParams; ?>";
+
+                <?php
+                            $counter++; 
+                            if (strpos($currentOption->getSku(), 'notfree_') === false) {
+                                $visibleFieldParamId = "options_".$currentOption->getId().$currentOption->getSku()."_text";
+                ?>
+
+                <?php  echo $javascriptArray ?>[<?php echo $counter ?>] = "<?php echo $visibleFieldParamId; ?>";
+
+                <?php 
+                                $counter++;
+                            }
+                        }
+                    }
+                ?>
+            </script>
+
+            <input type="text" onchange="opConfig.reloadPrice()" id="options_<?php echo $_option->getId() ?>_text" class="input-text<?php echo $_option->getIsRequire() ? ' required-entry' : '' ?> <?php echo $_option->getMaxCharacters() ? ' validate-length maximum-length-'.$_option->getMaxCharacters() : '' ?> validate-initials product-custom-option" name="options[<?php echo $_option->getId() ?>]" value="<?php echo $this->escapeHtml($this->getDefaultValue()) ?>" />
+            <?php } else { ?>
+            <input type="text" onchange="opConfig.reloadPrice()" id="options_<?php echo $_option->getId() ?>_text" class="input-text<?php echo $_option->getIsRequire() ? ' required-entry' : '' ?> <?php echo $_option->getMaxCharacters() ? ' validate-length maximum-length-'.$_option->getMaxCharacters() : '' ?> product-custom-option" name="options[<?php echo $_option->getId() ?>]" value="<?php echo $this->escapeHtml($this->getDefaultValue()) ?>" />
+            <?php } ?>
+
+            <?php elseif ($_option->getType() == Mage_Catalog_Model_Product_Option::OPTION_TYPE_AREA): ?>
+            <textarea id="options_<?php echo $_option->getId() ?>_text" onchange="opConfig.reloadPrice()" class="<?php echo $_option->getIsRequire() ? ' required-entry' : '' ?> <?php echo $_option->getMaxCharacters() ? ' validate-length maximum-length-'.$_option->getMaxCharacters() : '' ?> product-custom-option" name="options[<?php echo $_option->getId() ?>]" rows="5" cols="25"><?php echo $this->escapeHtml($this->getDefaultValue()) ?></textarea>
+            <?php endif; ?>
+            <?php if ($_option->getMaxCharacters()): ?>
+                <p class="note"><?php echo Mage::helper('catalog')->__('Maximum number of characters:')?> <strong><?php echo $_option->getMaxCharacters() ?></strong></p>
+            <?php endif; ?>
+        </div>
+    </dd>
+<?php
+    if ($shouldBeHidden):
+        if ($isFree) {
+            $hasPriceSpan = count($embroideryPrices) ? true : false;
+            
+            if ($hasPriceSpan) {
+                sort($embroideryPrices[(int) end(explode('_', $_option->getSku()))]);
+
+                $priceFrom = $this->_formatPrice(array(
+                    'is_percent' => ($this->getOption()->getPriceType() == 'percent') ? true : false,
+                    'pricing_value' => $embroideryPrices[$customId][0]
+                ));
+
+                $priceTo = $this->_formatPrice(array(
+                    'is_percent' => ($this->getOption()->getPriceType() == 'percent') ? true : false,
+                    'pricing_value' => end($embroideryPrices[$customId])
+                ));
+
+                $hasPriceSpan = ($priceFrom != $priceTo) ? true : false;
+            }
+
+            /*
+             * If $isNotFree we need to save all initial fields ids 
+             * in javascript array to be able to added as parameter to 
+             * javascript function validateName where we remove initial
+             * values from fields
+             */
+            $javascriptInitialArray  = 'b' . $_option->getId() . 'Array'; 
+?>
+    <dt>
+        <script>
+            var <?php echo $javascriptInitialArray ?> = new Array();
+            <?php 
+                $counter = 0;
+                foreach ($optionCollection as $currentOption) {
+                    $isInitialOption= (strpos($currentOption->getSku(), 'initial_') === false) ? false : true;
+                    if ($isInitialOption) {
+                        $initialParams = 'options_'.$currentOption->getId().'_text';
+            ?>
+
+            <?php echo $javascriptInitialArray ?>[<?php echo $counter ?>] = "<?php echo $initialParams; ?>";
+
+            <?php 
+                        $counter++;
+                    }
+                }
+            ?>
+        </script>
+        <label<?php if ($_option->getIsRequire()) echo ' class="required"' ?>><?php if ($_option->getIsRequire()) echo '<em>*</em>' ?><?php echo  $this->htmlEscape($_option->getTitle()) ?></label>
+        <?php if ($hasPriceSpan): ?><?php if ($priceFrom != ''): ?><?php echo $this->__('From') ?> <?php echo $priceFrom ?> <?php echo $this->__('to') ?><?php else: ?><?php echo $this->__('Up to') ?><?php endif; ?> <?php echo $priceTo ?><?php else: ?><?php echo $this->getFormatedPrice() ?><?php endif; ?>
+        </dt>
+    <dd<?php if ($_option->decoratedIsLast){?> class="last"<?php }?>>
+<?php
+            $paramFree      = 'options_'.$_option->getId().'_text';
+            $paramNotFree   = '';
+            $visibleFieldId = 'options_'.$_option->getId().$_option->getSku().'_text';
+            $searchedSku    = 'not'.$_option->getSku();
+
+            foreach ($optionCollection as $currentOption) {
+                if ($currentOption->getSku() == $searchedSku) {
+                    $paramNotFree = 'options_'.$currentOption->getId().'_text';
+                    break;
+                }
+            }
+?>
+        <input type="text" onchange="validateName(<?php echo $paramNotFree ?>, <?php echo $paramFree ?>, <?php echo $visibleFieldId ?>, <?php echo $javascriptInitialArray ?> , <?php echo $_option->getMaxCharacters() ?>)" id="options_<?php echo $_option->getId().$_option->getSku() ?>_text" class="input-text<?php echo $_option->getIsRequire() ? ' required-entry' : '' ?> <?php echo $_option->getMaxCharacters() ? ' validate-length maximum-length-'.$_option->getMaxCharacters() : '' ?> product-custom-option-parent validate-embroidery" name="<?php echo $_option->getId().$_option->getSku() ?>" />
+        <?php if ($_option->getMaxCharacters()): ?>
+        <p class="note"><?php echo Mage::helper('catalog')->__('Maximum number of characters:')?> <strong><?php echo $_option->getMaxCharacters() ?></strong></p>
+        <?php endif; ?>
+    </dd>        
+<?php
+        }
+    endif;
+?>
