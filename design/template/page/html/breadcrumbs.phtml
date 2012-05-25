@@ -1,12 +1,12 @@
 <?php if($crumbs && is_array($crumbs)): ?>
 <nav id="breadcrumbs">
-    <ul>
+    <ul xmlns:v="http://rdf.data-vocabulary.org/#">
         <?php foreach($crumbs as $_crumbName=>$_crumbInfo): ?>
-            <li class="<?php echo $_crumbName ?>">
+            <li class="<?php echo $_crumbName ?>" typeof="v:Breadcrumb">
             <?php if($_crumbInfo['link']): ?>
-                <a href="<?php echo $_crumbInfo['link'] ?>" title="<?php echo $this->htmlEscape($_crumbInfo['title']) ?>"><?php echo $this->htmlEscape($_crumbInfo['label']) ?></a>
+                <a href="<?php echo $_crumbInfo['link'] ?>" title="<?php echo $this->htmlEscape($_crumbInfo['title']) ?>" rel="v:url" property="v:title"><?php echo $this->htmlEscape($_crumbInfo['label']) ?></a>
             <?php elseif($_crumbInfo['last']): ?>
-                <strong><?php echo $this->htmlEscape($_crumbInfo['label']) ?></strong>
+                <strong rel="v:child" property="v:title"><?php echo $this->htmlEscape($_crumbInfo['label']) ?></strong>
             <?php else: ?>
                 <?php echo $this->htmlEscape($_crumbInfo['label']) ?>
             <?php endif; ?>

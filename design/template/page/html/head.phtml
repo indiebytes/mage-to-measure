@@ -1,10 +1,8 @@
-<!doctype html>  
-<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
-<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
-<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
-<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
-<!-- Consider adding an manifest.appcache: h5bp.com/d/Offline -->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="<?php echo $lang = strtolower(Mage::getStoreConfig('general/country/default')); ?>"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="<?php echo $lang; ?>"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="<?php echo $lang; ?>"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="<?php echo $lang; ?>"> <!--<![endif]-->
 <head>
     <meta http-equiv="Content-Type" content="<?php echo $this->getContentType() ?>" />
     <title><?php echo $this->getTitle() ?></title>
@@ -14,17 +12,15 @@
     <meta name="description" content="<?php echo htmlspecialchars($this->getDescription()) ?>" />
     <meta name="keywords" content="<?php echo htmlspecialchars($this->getKeywords()) ?>" />
     <meta name="robots" content="<?php echo htmlspecialchars($this->getRobots()) ?>" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <link rel="icon" href="<?php echo $this->getFaviconFile(); ?>" type="image/x-icon" />
     <link rel="shortcut icon" href="<?php echo $this->getFaviconFile(); ?>" type="image/x-icon" />
 
     <!--[if lt IE 7]>
-    <script type="text/javascript">
-    //<![CDATA[
+    <script>
         var BLANK_URL = '<?php echo $this->helper('core/js')->getJsUrl('blank.html') ?>';
         var BLANK_IMG = '<?php echo $this->helper('core/js')->getJsUrl('spacer.gif') ?>';
-    //]]>
     </script>
     <![endif]-->
 
