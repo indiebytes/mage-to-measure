@@ -2,6 +2,7 @@
     <header class="page-title">
         <h1><?php echo Mage::helper('sales')->__('Returns') ?></h1>
     </header>
+
     <form id="oar_widget_orders_and_returns_form" action="<?php echo $this->getActionUrl() ?>" method="post" class="search-form" name="guest_post">
         <p>
             <label for="oar_order_id" class="required"><?php echo Mage::helper('sales')->__('Order ID') ?> <em>*</em></label>
@@ -35,8 +36,8 @@
         </p>
     </form>
 </article>
+
 <script>
-//<![CDATA[
     if ($('quick_search_type_id').value == 'zip') {
         $('oar-zip').show();
         $('oar-email').hide();
@@ -58,5 +59,4 @@
        }
        return false;
    }
-//]]>
 </script>
